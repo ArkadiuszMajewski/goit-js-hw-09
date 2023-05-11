@@ -1,6 +1,7 @@
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
-
+import Notiflix from 'notiflix';
+// console.log(Notiflix);
 const dateTimePicker = document.querySelector('#datetime-picker');
 // console.log(dateTimePicker);
 
@@ -26,10 +27,12 @@ flatpickr('#datetime-picker', {
     selectedDatesTimestamp = selectedDates[0].getTime();
     if (selectedDatesTimestamp > new Date().getTime()) {
       // console.log(selectedDates[0]);
+      Notiflix.Notify.success('');
       buttonStart.removeAttribute('disabled');
       selectedDatesTimestamp = selectedDates[0].getTime();
     } else {
-      window.alert('Please choose a date in the future');
+      Notiflix.Notify.failure('Please choose a date in the future');
+      // window.alert('Please choose a date in the future');
       buttonStart.setAttribute('disabled', '');
     }
   },
