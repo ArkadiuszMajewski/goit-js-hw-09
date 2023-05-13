@@ -3,7 +3,7 @@ const delay = document.querySelector(`[name="delay"]`);
 const step = document.querySelector(`[name="step"]`);
 const amount = document.querySelector(`[name="amount"]`);
 const form = document.querySelector('.form');
-
+let shouldResolve = 0;
 let position = 0;
 const createPromise = (position, delay) =>
   new Promise((resolve, reject) => {
