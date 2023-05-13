@@ -10,9 +10,13 @@ const createPromise = (position, delay) =>
     setTimeout(() => {
       shouldResolve = Math.random() > 0.3;
       if (shouldResolve) {
-        resolve('');
+        resolve(
+          '`✅ Fulfilled promise ${position} in ${new Date().getTime() - clickTime}ms`'
+        );
       } else {
-        reject('');
+        reject(
+          '`❌ Rejected promise ${position} in ${new Date().getTime() - clickTime}ms`'
+        );
       }
     }, delay);
   });
