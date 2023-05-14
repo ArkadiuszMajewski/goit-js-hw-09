@@ -3,20 +3,16 @@ const delay = document.querySelector(`[name="delay"]`);
 const step = document.querySelector(`[name="step"]`);
 const amount = document.querySelector(`[name="amount"]`);
 const form = document.querySelector('.form');
-let shouldResolve = 0;
+
 let position = 0;
-const createPromise = (position, delay) =>
+const createPromise = delay =>
   new Promise((resolve, reject) => {
     setTimeout(() => {
       shouldResolve = Math.random() > 0.3;
       if (shouldResolve) {
-        resolve(
-          '`✅ Fulfilled promise ${position} in ${new Date().getTime() - clickTime}ms`'
-        );
+        resolve('');
       } else {
-        reject(
-          '`❌ Rejected promise ${position} in ${new Date().getTime() - clickTime}ms`'
-        );
+        reject('');
       }
     }, delay);
   });
@@ -33,14 +29,20 @@ const rejectHandler = result => (
     `❌ Rejected promise ${position} in ${new Date().getTime() - clickTime}ms`
   )
 );
+let counter = 0;
 
 let clickTime = 0;
+
 form.addEventListener('submit', event => {
+  counter = 0;
+  position = 0;
   event.preventDefault();
   clickTime = new Date().getTime();
 
-  for (let i = 0; i < [amount.value]; i++) {
-    createPromise(2, delay.value).then(resolveHandler).catch(rejectHandler);
-  }
-  position = 0;
+  let inter = setInterval(function () {
+    if (counter < amount.value) {
+      createPromise(delay.value).then(resolveHandler).catch(rejectHandler);
+      counter++;
+    } else clearInterval(inter);
+  }, step.value);
 });
