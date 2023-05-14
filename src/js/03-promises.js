@@ -14,7 +14,7 @@ const createPromise = delay =>
       } else {
         reject('');
       }
-    }, delay);
+    }, delay - step.value);
   });
 
 const resolveHandler = result => (
