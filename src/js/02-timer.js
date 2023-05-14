@@ -44,7 +44,6 @@ buttonStart.addEventListener('click', event => {
   let timeCount = setInterval(function () {
     var now = new Date().getTime();
     var distance = selectedDatesTimestamp - now;
-    console.log(distance);
     days.textContent = convertMs(distance).days.toString().padStart(2, '0');
     hours.textContent = convertMs(distance).hours.toString().padStart(2, '0');
     minutes.textContent = convertMs(distance)
