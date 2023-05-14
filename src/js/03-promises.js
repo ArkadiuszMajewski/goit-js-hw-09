@@ -5,6 +5,7 @@ const amount = document.querySelector(`[name="amount"]`);
 const form = document.querySelector('.form');
 let shouldResolve = 0;
 let position = 0;
+
 const createPromise = delay =>
   new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -30,7 +31,6 @@ const rejectHandler = result => (
   )
 );
 let counter = 0;
-
 let clickTime = 0;
 
 form.addEventListener('submit', event => {
