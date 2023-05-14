@@ -40,12 +40,12 @@ flatpickr('#datetime-picker', {
 
 buttonStart.addEventListener('click', event => {
   comparedTime = selectedDatesTimestamp - new Date().getTime();
+
   let timeCount = setInterval(function () {
     var now = new Date().getTime();
     var distance = selectedDatesTimestamp - now;
-
+    console.log(distance);
     days.textContent = convertMs(distance).days.toString().padStart(2, '0');
-
     hours.textContent = convertMs(distance).hours.toString().padStart(2, '0');
     minutes.textContent = convertMs(distance)
       .minutes.toString()
@@ -53,6 +53,12 @@ buttonStart.addEventListener('click', event => {
     seconds.textContent = convertMs(distance)
       .seconds.toString()
       .padStart(2, '0');
+    stopInterval();
+    function stopInterval() {
+      if (distance <= 1000) {
+        clearInterval(timeCount);
+      } else return;
+    }
   }, 1000);
 });
 
